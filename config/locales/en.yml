@@ -1,0 +1,19 @@
+en:
+  activerecord:
+    attributes:
+      autolink:
+        prefix: Reference prefix
+        target_url: Target URL
+    errors:
+      models:
+        autolink:
+          attributes:
+            prefix:
+              invalid: must be in all caps
+            target_url:
+              invalid: must contain <num> for the reference number
+
+  autolinks_title_edit: Edit autolink
+  autolinks_title_index: Autolinks
+  autolinks_title_new: New autolink
+  autolinks_title_show: Autolink

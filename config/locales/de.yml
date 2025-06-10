@@ -1,0 +1,19 @@
+de:
+  activerecord:
+    attributes:
+      autolink:
+        prefix: Referenzpräfix
+        target_url: Ziel-URL
+    errors:
+      models:
+        autolink:
+          attributes:
+            prefix:
+              invalid: muss in Grossbuchstaben sein
+            target_url:
+              invalid: muss <num> für die Referenznummer enthalten
+
+  autolinks_title_edit: Autolink bearbeiten
+  autolinks_title_index: Autolinks
+  autolinks_title_new: Neuer Autolink
+  autolinks_title_show: Autolink
