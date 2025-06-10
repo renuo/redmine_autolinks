@@ -8,7 +8,9 @@ class Autolink < ApplicationRecord
   validates :target_url, presence: true, length: { maximum: 255 },
                          format: { with: %r{\Ahttps?://.+<num>.*\z} }
 
-  def target_url_with(num)
-    target_url.sub("<num>", num)
+  class << self
+    def for_issue(issue)
+      where(project_id: issue.project_id).pluck(:prefix, :target_url).to_h
+    end
   end
 end
