@@ -14,13 +14,15 @@ class AutolinksController < ApplicationController
     @autolink = Autolink.new(project: @project)
   end
 
+  def edit; end
+
   def create
     @autolink = Autolink.new(**autolink_params, project: @project)
 
     if @autolink.save
       redirect_to project_autolink_path(@project, @autolink)
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -28,7 +30,7 @@ class AutolinksController < ApplicationController
     if @autolink.update(autolink_params)
       redirect_to project_autolink_path(@project, @autolink)
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
