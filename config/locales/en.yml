@@ -13,6 +13,9 @@ en:
             target_url:
               invalid: must contain <num> for the reference number
 
+  autolinks_hint_prefix: This prefix appended by a string will generate a link any time it is found in an issue.
+  autolinks_placeholder_prefix: TICKET
+  autolinks_placeholder_target_url: https://www.redmine.org/issues/<num>
   autolinks_title_edit: Edit autolink
   autolinks_title_index: Autolinks
   autolinks_title_new: New autolink
