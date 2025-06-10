@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+export BUNDLE_GEMFILE=PluginGemfile
+
+# shellcheck disable=SC2046
+bundle exec rubocop -c .rubocop.yml $([ -n "$GITHUB_ACTIONS" ] && echo -f g)

@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+export RAILS_ENV=production
+export SECRET_KEY_BASE_DUMMY=1
+
+BUNDLE_GEMFILE=PluginGemfile bundle
+cd ../..
+
+cp plugins/redmine_autolinks/.ruby-version .
+[ -f config/database.yml ] || cp plugins/redmine_autolinks/.github/database.yml config
+
+bundle
+bin/rails db:migrate
+NAME=redmine_autolinks bin/rails redmine:plugins:migrate

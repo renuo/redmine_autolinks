@@ -1,0 +1,43 @@
+name: ci
+
+on: push
+
+env:
+  BUNDLE_PATH: vendor/bundle
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Redmine
+        uses: actions/checkout@v4
+        with:
+          ref: 6.0-stable
+          repository: redmine/redmine
+
+      - name: Checkout Autolinks
+        uses: actions/checkout@v4
+        with:
+          path: plugins/redmine_autolinks
+          repository: renuo/redmine_autolinks
+
+      - name: Restore cache
+        uses: actions/cache@v4
+        with:
+          key: gems-${{ hashFiles('Gemfile') }}
+          restore-keys: gems
+          path: vendor/bundle
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: false
+          ruby-version: 3.3
+
+      - name: Set up Autolinks
+        run: bin/setup
+        working-directory: plugins/redmine_autolinks
+
+      - name: Run linters
+        run: bin/fastcheck
+        working-directory: plugins/redmine_autolinks

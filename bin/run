@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+cd ../..
+RAILS_ENV=production SECRET_KEY_BASE_DUMMY=1 exec bin/rails s
