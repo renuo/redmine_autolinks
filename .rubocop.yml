@@ -1,0 +1,5 @@
+inherit_gem:
+  renuocop: config/base.yml
+
+AllCops:
+  SuggestExtensions: false

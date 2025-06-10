@@ -9,8 +9,8 @@ Redmine::Plugin.register :redmine_autolinks do
   author_url "https://github.com/renuo"
 
   permission :autolinks, { autolinks: %i[index show new edit create update destroy] },
-                         require: :loggedin
-  
+             require: :loggedin
+
   menu :project_menu, :autolinks, { controller: :autolinks, action: :index },
        caption: "Autolinks", after: :activity, param: :project_id
 end

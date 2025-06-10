@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Autolink < ActiveRecord::Base
+class Autolink < ApplicationRecord
   belongs_to :project
 
   validates :prefix, presence: true, length: { in: 2..20 },
