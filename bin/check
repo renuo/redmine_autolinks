@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+cd ../..
+TEST=plugins/redmine_autolinks bin/rake test
