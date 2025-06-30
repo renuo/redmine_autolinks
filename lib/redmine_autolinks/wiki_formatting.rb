@@ -2,7 +2,7 @@
 
 module RedmineAutolinks
   module WikiFormatting
-    AUTOLINK_PREFIX = /([A-Z_]{2,20})-(\d+)/
+    AUTOLINK_PREFIX = /\b([A-Z_]{2,20})-([\dA-Z]+)/
 
     def to_html(format, text, options = {})
       return super unless options[:object].is_a?(Issue)
