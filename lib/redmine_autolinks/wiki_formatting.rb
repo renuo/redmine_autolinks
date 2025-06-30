@@ -11,7 +11,7 @@ module RedmineAutolinks
 
       super.gsub(AUTOLINK_PREFIX) do |match|
         autolinks ||= Autolink.for_issue(options[:object])
-        url = ERB::Escape.html_escape(autolinks[Regexp.last_match[1]]&.sub("<num>", Regexp.last_match[2]))
+        url = ERB::Util.html_escape(autolinks[Regexp.last_match[1]]&.sub("<num>", Regexp.last_match[2]))
 
         url.blank? ? match : "<a href=\"#{url}\">#{match}</a>"
       end
