@@ -3,7 +3,7 @@ name: ci
 on: push
 
 env:
-  BUNDLE_PATH: vendor/bundle
+  BUNDLE_PATH: ~/.bundle/gems
 
 jobs:
   check:
@@ -26,7 +26,7 @@ jobs:
         with:
           key: gems-${{ hashFiles('Gemfile') }}
           restore-keys: gems
-          path: vendor/bundle
+          path: ~/.bundle/gems
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -40,4 +40,8 @@ jobs:
 
       - name: Run linters
         run: bin/fastcheck
+        working-directory: plugins/redmine_autolinks
+
+      - name: Run tests
+        run: bin/check
         working-directory: plugins/redmine_autolinks
