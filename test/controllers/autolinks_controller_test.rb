@@ -4,7 +4,7 @@ require "test_helper"
 
 class AutolinksControllerTest < ActionDispatch::IntegrationTest
   def autolink
-    @autolink ||= Autolink.create!(prefix: "EX", target_url: "https://example.com/<num>", project: @project)
+    @autolink ||= Autolink.create!(prefix: "EXAMPLE", target_url: "https://a.test/<num>", project: @project)
   end
 
   setup do
@@ -15,14 +15,8 @@ class AutolinksControllerTest < ActionDispatch::IntegrationTest
     autolink
     get project_autolinks_path(@project)
     assert_response :success
-    assert_match "EX-123", response.body
-    assert_match "https://example.com/123", response.body
-  end
-
-  test "#show" do
-    get project_autolink_path(@project, autolink)
-    assert_response :success
-    assert_match "https://example.com/&lt;num&gt;", response.body
+    assert_match "EXAMPLE", response.body
+    assert_match "https://a.test/&lt;num&gt;", response.body
   end
 
   test "#new" do

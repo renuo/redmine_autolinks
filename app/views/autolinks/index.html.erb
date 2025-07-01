@@ -1,8 +1,33 @@
 <%= title t("autolinks_title_index") %>
 
-<%= link_to t("autolinks_title_new"), new_project_autolink_path %>
+<p>
+  <%= link_to sprite_icon('add', l("autolinks_title_new")),
+              new_project_autolink_path, class: "icon icon-add" %>
+</p>
 
-<% @autolinks.each do |autolink| %>
-  <p><%= link_to "#{autolink.prefix}-123", project_autolink_path(@project, autolink) %> →
-     <%= autolink.target_url.sub("<num>", "123") %></p>
+<% if @autolinks.any? %>
+  <table class="list">
+    <thead>
+      <tr>
+        <th><%= Autolink.human_attribute_name(:prefix) %></th>
+        <th><%= Autolink.human_attribute_name(:target_url) %></th>
+        <th style="width:15%"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @autolinks.each do |autolink| %>
+        <tr>
+          <td class="name"><%= autolink.prefix %></td>
+          <td class="name"><%= autolink.target_url %></td>
+          <td class="buttons">
+            <%= link_to sprite_icon("edit", l(:button_edit)),
+                        edit_project_autolink_path(@project, autolink), class: "icon" %>
+            <%= delete_link project_autolink_path(@project, autolink) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p class="nodata"><%= l(:label_no_data) %></p>
 <% end %>

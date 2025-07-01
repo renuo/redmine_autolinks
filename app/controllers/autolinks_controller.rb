@@ -2,13 +2,11 @@
 
 class AutolinksController < ApplicationController
   before_action :set_project
-  before_action :set_autolink, only: %i[show edit update destroy]
+  before_action :set_autolink, only: %i[edit update destroy]
 
   def index
     @autolinks = Autolink.where(project: @project)
   end
-
-  def show; end
 
   def new
     @autolink = Autolink.new(project: @project)
@@ -20,7 +18,7 @@ class AutolinksController < ApplicationController
     @autolink = Autolink.new(**autolink_params, project: @project)
 
     if @autolink.save
-      redirect_to project_autolink_path(@project, @autolink)
+      redirect_to project_autolinks_path(@project)
     else
       render :new, status: :unprocessable_entity
     end
@@ -28,7 +26,7 @@ class AutolinksController < ApplicationController
 
   def update
     if @autolink.update(autolink_params)
-      redirect_to project_autolink_path(@project, @autolink)
+      redirect_to project_autolinks_path(@project)
     else
       render :edit, status: :unprocessable_entity
     end
@@ -36,7 +34,7 @@ class AutolinksController < ApplicationController
 
   def destroy
     @autolink.destroy!
-    redirect_to project_autolinks_path
+    redirect_to project_autolinks_path(@project)
   end
 
   private

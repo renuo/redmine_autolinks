@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 resources :projects do
-  resources :autolinks
+  resources :autolinks, except: :show
 end

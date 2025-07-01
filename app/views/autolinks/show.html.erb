@@ -1,7 +1,0 @@
-<%= title t("autolinks_title_show") %>
-
-<p><%= @autolink.prefix %> → <%= @autolink.target_url %></p>
-
-<%= link_to t("button_back"), project_autolinks_path(@project) %>
-<%= link_to t("button_edit"), edit_project_autolink_path(@project, @autolink) %>
-<%= link_to t("button_delete"), project_autolink_path(@project, @autolink), method: :delete %>
