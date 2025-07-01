@@ -1,9 +1,6 @@
 <%= title t("autolinks_title_index") %>
 
-<p>
-  <%= link_to sprite_icon('add', l("autolinks_title_new")),
-              new_project_autolink_path, class: "icon icon-add" %>
-</p>
+<p><%= link_to l("autolinks_title_new"), new_project_autolink_path, class: "icon icon-add" %></p>
 
 <% if @autolinks.any? %>
   <table class="list">
@@ -20,8 +17,7 @@
           <td class="name"><%= autolink.prefix %></td>
           <td class="name"><%= autolink.target_url %></td>
           <td class="buttons">
-            <%= link_to sprite_icon("edit", l(:button_edit)),
-                        edit_project_autolink_path(@project, autolink), class: "icon" %>
+            <%= link_to l(:button_edit), edit_project_autolink_path(@project, autolink), class: "icon icon-edit" %>
             <%= delete_link project_autolink_path(@project, autolink) %>
           </td>
         </tr>
