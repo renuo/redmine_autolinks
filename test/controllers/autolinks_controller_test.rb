@@ -2,21 +2,22 @@
 
 require "test_helper"
 
-class AutolinksControllerTest < ActionDispatch::IntegrationTest
+class AutolinksControllerTest < Redmine::IntegrationTest
   def autolink
-    @autolink ||= Autolink.create!(prefix: "EXAMPLE", target_url: "https://a.test/<num>", project: @project)
+    @autolink ||= @project.autolinks.create!(prefix: "EXAMPLE", target_url: "https://a.test/<ref>")
   end
 
   setup do
     @project = Project.first
+    log_user("admin", "admin")
   end
 
   test "#index" do
     autolink
-    get project_autolinks_path(@project)
+    get settings_project_path(@project, tab: :autolinks)
     assert_response :success
     assert_match "EXAMPLE", response.body
-    assert_match "https://a.test/&lt;num&gt;", response.body
+    assert_match "https://a.test/&lt;ref&gt;", response.body
   end
 
   test "#new" do
@@ -30,12 +31,14 @@ class AutolinksControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "#create" do
-    post project_autolinks_path(@project), params: { autolink: { prefix: "AA", target_url: "http://a.test/<num>" } }
+    post project_autolinks_path(@project),
+         params: { autolink: { prefix: "AA", target_url: "http://a.test/<ref>" } }
     assert_response :found
   end
 
   test "#create with invalid params" do
-    post project_autolinks_path(@project), params: { autolink: { prefix: "aa", target_url: "http://a.test" } }
+    post project_autolinks_path(@project),
+         params: { autolink: { prefix: "aa", target_url: "http://a.test" } }
     assert_response :unprocessable_entity
   end
 

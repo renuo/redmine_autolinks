@@ -1,24 +1,21 @@
 # frozen_string_literal: true
 
 class AutolinksController < ApplicationController
+  before_action :authorize_global
   before_action :set_project
   before_action :set_autolink, only: %i[edit update destroy]
 
-  def index
-    @autolinks = Autolink.where(project: @project)
-  end
-
   def new
-    @autolink = Autolink.new(project: @project)
+    @autolink = @project.autolinks.new
   end
 
   def edit; end
 
   def create
-    @autolink = Autolink.new(**autolink_params, project: @project)
+    @autolink = @project.autolinks.new(autolink_params)
 
     if @autolink.save
-      redirect_to project_autolinks_path(@project)
+      redirect_to_settings
     else
       render :new, status: :unprocessable_entity
     end
@@ -26,7 +23,7 @@ class AutolinksController < ApplicationController
 
   def update
     if @autolink.update(autolink_params)
-      redirect_to project_autolinks_path(@project)
+      redirect_to_settings
     else
       render :edit, status: :unprocessable_entity
     end
@@ -34,17 +31,21 @@ class AutolinksController < ApplicationController
 
   def destroy
     @autolink.destroy!
-    redirect_to project_autolinks_path(@project)
+    redirect_to_settings
   end
 
   private
+
+  def redirect_to_settings
+    redirect_to settings_project_path(@project, tab: :autolinks)
+  end
 
   def set_project
     @project = Project.find(params[:project_id])
   end
 
   def set_autolink
-    @autolink = Autolink.find_by(id: params[:id], project: @project)
+    @autolink = @project.autolinks.find(params[:id])
   end
 
   def autolink_params

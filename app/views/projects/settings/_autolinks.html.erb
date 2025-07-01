@@ -1,0 +1,33 @@
+<% if User.current.allowed_to?(:manage_autolinks, @project) %>
+  <p><%= link_to t("autolinks_title_new"), new_project_autolink_path(@project), class: "icon icon-add" %></p>
+<% end %>
+
+<% autolinks = @project.autolinks.to_a %>
+
+<% if autolinks.any? %>
+  <table class="list">
+    <thead>
+      <tr>
+        <th><%= Autolink.human_attribute_name(:prefix) %></th>
+        <th><%= Autolink.human_attribute_name(:target_url) %></th>
+        <th style="width:15%"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% autolinks.each do |autolink| %>
+        <tr>
+          <td class="name"><%= autolink.prefix %></td>
+          <td class="name"><%= autolink.target_url %></td>
+          <td class="buttons">
+            <% if User.current.allowed_to?(:manage_autolinks, @project) %>
+              <%= link_to t("button_edit"), edit_project_autolink_path(@project, autolink), class: "icon icon-edit" %>
+              <%= delete_link project_autolink_path(@project, autolink) %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p class="nodata"><%= t("label_no_data") %></p>
+<% end %>
