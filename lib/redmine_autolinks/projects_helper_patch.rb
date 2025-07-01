@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module RedmineAutolinks
-  module ProjectsHelper
+  module ProjectsHelperPatch
     def self.included(base)
       base.class_eval do
         alias_method :project_settings_tabs_without_autolinks, :project_settings_tabs
@@ -18,4 +18,4 @@ module RedmineAutolinks
   end
 end
 
-ProjectsHelper.include RedmineAutolinks::ProjectsHelper
+ProjectsHelper.include RedmineAutolinks::ProjectsHelperPatch
