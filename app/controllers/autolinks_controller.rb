@@ -42,10 +42,14 @@ class AutolinksController < ApplicationController
 
   def set_project
     @project = Project.find(params[:project_id])
+  rescue ActiveRecord::RecordNotFound
+    render_404
   end
 
   def set_autolink
     @autolink = @project.autolinks.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    render_404
   end
 
   def autolink_params
