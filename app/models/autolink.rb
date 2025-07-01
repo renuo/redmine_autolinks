@@ -6,7 +6,7 @@ class Autolink < ApplicationRecord
   validates :prefix, presence: true, length: { in: 2..20 },
                      format: { with: /\A[A-Z_]+\z/ }
   validates :target_url, presence: true, length: { maximum: 255 },
-                         format: { with: %r{\Ahttps?://.+<num>.*\z} }
+                         format: { with: %r{\Ahttps?://.+<ref>.*\z} }
 
   class << self
     def for_issue(issue)

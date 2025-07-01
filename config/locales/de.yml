@@ -11,11 +11,11 @@ de:
             prefix:
               invalid: muss in Grossbuchstaben sein
             target_url:
-              invalid: muss <num> für die Referenznummer enthalten
+              invalid: muss <ref> für die Referenznummer enthalten
 
   autolinks_hint_prefix: Dieses Präfix erzeugt jedes Mal einen Link, wenn es in einem Issue gefunden wird.
   autolinks_placeholder_prefix: TICKET
-  autolinks_placeholder_target_url: https://www.redmine.org/issues/<num>
+  autolinks_placeholder_target_url: https://www.redmine.org/issues/<ref>
   autolinks_title_edit: Autolink bearbeiten
   autolinks_title_index: Autolinks
   autolinks_title_new: Neuer Autolink
