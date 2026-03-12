@@ -8,11 +8,14 @@ env:
 jobs:
   check:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        redmine_branch: [6.0-stable, master]
     steps:
       - name: Checkout Redmine
         uses: actions/checkout@v4
         with:
-          ref: 6.0-stable
+          ref: ${{ matrix.redmine_branch }}
           repository: redmine/redmine
 
       - name: Checkout Autolinks
